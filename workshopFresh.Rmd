@@ -1,0 +1,107 @@
+---
+title: "RMarkdown Demonstration"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, 
+                      error = FALSE, fig.width = 10)
+```
+
+## Intital Package Installations
+
+First, you will need to install some packages:
+
+```{r, eval = FALSE}
+packs = c("tidyverse", "data.table", "DT", 
+          "plotly", "ggplot2", "corrplot", 
+          "stargazer", "knitr", "rmarkdown")
+
+install.packages(packs)
+```
+
+You will only need to install them once, so do not worry about running this after you do it the first time.
+
+## Our Data
+
+We are going to make it easy on ourselves and use some of the data that R has built into it.  We are going use the "diamonds" data from the ggplot2 package.
+
+```{r}
+library(ggplot2)
+```
+
+
+## Data Exploration
+
+Data exploration is an important part of the statistical programming process.  We can start by taking a peak at our actual data.  This could also be helpful for people who may want to take a look at our document.
+
+```{r}
+DT::datatable(diamonds)
+```
+
+
+We often like to take an initial look at the correlations within our data.  This can be most enlightening, but dealing with a massive correlation matrix can be a hassle.  Instead, we can go the visual route. Before we produce our visualization, we need to do a little data work. The diamonds data contains a few variables that would need some work before being thrown into a correlation matrix. We will, instead, just work with the purely numeric variables.
+
+```{r}
+library(dplyr); library(corrplot)
+
+diamonds %>% 
+  select(price, carat, depth, table, x, y, z) %>% 
+  cor() %>% 
+  corrplot.mixed()
+```
+
+
+## Data Visualization
+
+### Static
+
+Often times, we might just want a nice static visualization.  Static, however, does not mean simple. R gives us the ability to create layers within our visualizations.  Likely the most popular package for static visualizations is ggplot2.
+
+
+
+```{r}
+library(ggplot2)
+
+p = ggplot(diamonds, aes(carat, price, color = cut)) +
+  geom_point(alpha = .5) +
+  geom_smooth(se = FALSE) +
+  facet_wrap(~ color) +
+  theme_minimal()
+
+p
+```
+
+### Interactive 
+
+There are a wide variety of packages designed for interactive visualizations in R. We already saw a few of the htmlwidget packages in use. Since we already have a ggplot created, we can just throw it to the ggplotly function from the plotly package.
+
+```{r}
+library(plotly)
+
+ggplotly(p)
+```
+
+
+## Results
+
+We can do a lot of different things with our results.  For example, we might want some of our results to actually be within our text -- there exists a significant relationship between carats and price (*r* = `r round(cor(diamonds$carat, diamonds$price), 2)`).
+
+We might want to include some more expanded results. 
+
+The following is our standard regression output, but in a nice interactive table:
+
+```{r}
+testLM = lm(price ~ carat, data = diamonds)
+
+DT::datatable(broom::tidy(testLM))
+```
+
+We might also want some model comparisons:
+
+```{r, results = "asis"}
+testLM2 = lm(price ~ carat + depth, data = diamonds)
+
+stargazer::stargazer(testLM, testLM2, type = "html", header = FALSE)
+```
+
