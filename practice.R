@@ -81,9 +81,12 @@ lines(lowess(mtcars$wt, mtcars$mpg), col = "#FF6600", lwd = 2)
 abline(lm(mpg ~ wt, data = mtcars), col = "#0099ff", lwd = 2)
 
 
-### Modify the legend to remove the border
+### Add a legend parameter to remove the border
 
-legend(x = 4, y = 30, legend = c("Lowess", 'lm'), lty = c(1,1), lwd = c(2,2), col = c("#FF6600", "#0099ff"))
+plot(mtcars$wt, mtcars$mpg, pch = 19)
+lines(lowess(mtcars$wt, mtcars$mpg), col = "#FF6600", lwd = 2)
+abline(lm(mpg ~ wt, data = mtcars), col = "#0099ff", lwd = 2)
+legend(x = 4, y = 30, legend = c("Lowess", 'LM'), lwd = c(2,2), col = c("#FF6600", "#0099ff"))
 
 
 ######################
@@ -92,7 +95,7 @@ legend(x = 4, y = 30, legend = c("Lowess", 'lm'), lty = c(1,1), lwd = c(2,2), co
 
 install.packages("tidyverse")
 
-library(tidyverse)
+library(dplyr); library(tidyr)
 
 
 ####################################
