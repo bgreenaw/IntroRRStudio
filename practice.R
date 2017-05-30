@@ -2,26 +2,26 @@
 ### Section 1 ###
 #######################
 
-# create a simple object
-UScapt = 'D.C.'
-UScapt
-
 # 3 ways to create the same object
 numList1 = c(1, 2, 3, 4, 5)
 numList2 = 1:5
 numList3 = seq(from = 1, to=5, by=1)
 
+# See output of each
 numList1
 numList2
 numList3
 
+# Compare numList1 and numList2
 numList1 == numList2
 
-
-numList1[1:3]
+# see how list multiplication works
 numList1[1:3] * 5
 
-nulist_x5 <- numList1[1:3] * 5
+numList1[1:3] * numList2[1:3]
+
+numList1[1:3] * numList2[1:2]
+
 
 ### Create a object with values 1 to 10 and 50 to 75
 
@@ -83,7 +83,7 @@ abline(lm(mpg ~ wt, data = mtcars), col = "#0099ff", lwd = 2)
 
 ### Modify the legend to remove the border
 
-legend(x = 5, y = 30, legend = c("Lowess", 'lm'), lty = c(1,1), lwd = c(2,2), col = c("#FF6600", "#0099ff"))
+legend(x = 4, y = 30, legend = c("Lowess", 'lm'), lty = c(1,1), lwd = c(2,2), col = c("#FF6600", "#0099ff"))
 
 
 ######################
