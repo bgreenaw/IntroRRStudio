@@ -1,5 +1,5 @@
 #######################
-### Section 1 ###
+### Section 1       ###
 #######################
 
 # 3 ways to create the same object
@@ -28,7 +28,7 @@ numList1[1:3] * numList2[1:2]
 numlist =
 
 #################################
-### Section 2 ###
+### Section 2                 ###
 #################################
 
 mtcars
@@ -49,7 +49,7 @@ mtcars[1, 1]
 mtcars[]
 
 #######################################
-### Section 3 ###
+### Section 3                       ###
 #######################################
 
 mtcars[mtcars$cyl == 6 | mtcars$cyl == 8 & mtcars$hp >= 146,]
@@ -63,7 +63,7 @@ mtcars[mtcars$cyl == 6 | (mtcars$cyl == 8 & mtcars$hp >= 146),]
 mtcars[]
 
 #############################
-### Section 4 ###
+### Section 4             ###
 #############################
 
 cor(mtcars$mpg, mtcars$wt)
@@ -90,16 +90,16 @@ legend(x = 4, y = 30, legend = c("Lowess", 'LM'), lwd = c(2,2), col = c("#FF6600
 
 
 ######################
-### TidyVerse ###
+### TidyVerse      ###
 ######################
 
-install.packages("tidyverse")
+install.packages("dplyr"); install.packages("tidyr")
 
 library(dplyr); library(tidyr)
 
 
 ####################################
-### Section 5 ###
+### Section 5                    ###
 ####################################
 
 
@@ -119,7 +119,7 @@ newData == newData_dplyr
 
 
 ####################################
-### Section 6 ###
+### Section 6                    ###
 ####################################
 
 x = c(1, 2, NA, NA, 5, 6, NA, 8, NA, NA)
